@@ -1,7 +1,7 @@
-﻿using OpenQA.Selenium.Support.PageObjects;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Support.PageObjects;
 
-namespace Test_PagePatern
+namespace TumblerBot_Selenium_Test
 {
     class PageBase
     {

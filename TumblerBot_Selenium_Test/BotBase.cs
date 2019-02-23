@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using OpenQA.Selenium;
 
-namespace Test_PagePatern
+namespace TumblerBot_Selenium_Test
 {
     public abstract class BotBase
     {

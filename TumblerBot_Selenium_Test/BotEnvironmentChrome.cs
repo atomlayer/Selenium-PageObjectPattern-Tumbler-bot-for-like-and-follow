@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 
-namespace Test_PagePatern
+namespace TumblerBot_Selenium_Test
 {
     public class BotEnvironmentChrome:BotEnvironmentBase
     {

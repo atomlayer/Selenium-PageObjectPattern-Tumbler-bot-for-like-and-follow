@@ -73,7 +73,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="DataBase.cs" />
+    <Compile Include="Pages\ArchivePage.cs" />
     <Compile Include="Pages\SearchPage.cs" />
+    <Compile Include="SearshBlogsAction.cs" />
     <Compile Include="Settings.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

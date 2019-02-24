@@ -13,6 +13,11 @@ namespace TumblerBot_Selenium_Test.Pages
         {
         }
 
-
+ 
+        public List<string> GetImageLinks()
+        {
+            var imageLinks = driver.FindElements(By.CssSelector("div.post-info-tumblelog > a"));
+            return imageLinks.Select(n => n.GetAttribute("href")).ToList();
+        }
     }
 }

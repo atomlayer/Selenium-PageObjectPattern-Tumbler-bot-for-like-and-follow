@@ -24,8 +24,11 @@ namespace TumblerBot_Selenium_Test
         [JsonProperty]
         public List<string> SearchWords;
 
+        public int Delay;
+
         private static string _settingsFile=@"settings.json";
 
+        
 
         public string SearchWordsText
         {

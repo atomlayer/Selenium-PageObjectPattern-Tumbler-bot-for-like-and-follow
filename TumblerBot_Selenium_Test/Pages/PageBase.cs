@@ -6,7 +6,6 @@ namespace TumblerBot_Selenium_Test.Pages
     class PageBase
     {
         protected IWebDriver driver;
-        
 
         public PageBase(IWebDriver driver)
         {

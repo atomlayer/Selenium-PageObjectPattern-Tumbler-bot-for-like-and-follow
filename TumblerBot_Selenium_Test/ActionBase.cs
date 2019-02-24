@@ -14,10 +14,14 @@ namespace TumblerBot_Selenium_Test
             BotEnvironment = botEnvironment;
         }
 
-        public virtual void Action()
+
+        public void Initialize(BotEnvironmentBase botEnvironment)
         {
-            
+            BotEnvironment = botEnvironment;
         }
+
+        public abstract void Action();
+
 
         public  void ScrollDown()
         {

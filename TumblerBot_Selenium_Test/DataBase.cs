@@ -10,7 +10,9 @@ namespace TumblerBot_Selenium_Test
     {
         private List<string> imageLinks;
         public List<string> blogs;
- 
+        public int GetCountOfLike { get; set; }
+        public int GetCountOfFollow { get; set; }
+
         public void AddLinkToImage(string input)
         {
             imageLinks.Add(input);
@@ -19,6 +21,17 @@ namespace TumblerBot_Selenium_Test
         public void AddBlogs(List<string> blogs)
         {
             this.blogs = blogs;
+        }
+
+        private int i = 0;
+        public string GetBlog()
+        {
+            return blogs[++i];
+        }
+
+        public bool BlogsExists()
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NLog;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
@@ -10,7 +11,7 @@ namespace TumblerBot_Selenium_Test.Pages
 {
     class ArchivePage:PageBase
     {
-        public ArchivePage(IWebDriver driver) : base(driver)
+        public ArchivePage(IWebDriver driver, Logger logger) : base(driver,logger)
         {
         }
 

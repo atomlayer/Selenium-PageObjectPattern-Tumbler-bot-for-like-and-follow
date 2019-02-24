@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NLog;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.PageObjects;
@@ -11,7 +12,7 @@ namespace TumblerBot_Selenium_Test.Pages
 {
     class PostPage:PageBase
     {
-        public PostPage(IWebDriver driver) : base(driver)
+        public PostPage(IWebDriver driver, Logger logger) : base(driver, logger)
         {
         }
 
@@ -26,21 +27,37 @@ namespace TumblerBot_Selenium_Test.Pages
         [FindsBy(How = How.CssSelector, Using = "body > iframe.tmblr-iframe.tmblr-iframe--unified-controls.tmblr-iframe--loaded.iframe-controls--desktop")]
         private IWebElement iframe;
 
-        public void SwitchToIFrame()
+        void SwitchToIFrame()
         {
-            driver.SwitchTo().Frame(iframe);
+            try {   driver.SwitchTo().Frame(iframe);}
+            catch (Exception ex){logger.Error(ex.Message);}
         }
 
-        public void PutLike()
+        public bool PutLike(string postURL)
         {
             SwitchToIFrame();
-            MouseClickByLocator(@".tx-icon-button.like-button");
+            try
+            {
+                MouseClickByLocator(@".tx-icon-button.like-button");
+                logger.Trace($"Liked:  {postURL}");
+                return true;
+            }
+            catch(Exception ex) { logger.Error($"Not liked: {postURL} | {ex.Message}");}
+
+            return false;
         }
 
-        public void ToFollow()
+        public bool ToFollow(string postURL)
         {
-            SwitchToIFrame();
-            MouseClickByLocator(@".tx-button.follow-button");
+            try
+            {
+                MouseClickByLocator(@".tx-button.follow-button");
+                logger.Trace($"Followed:  {postURL}");
+                return true;
+            }
+            catch (Exception ex) { logger.Error($"Not followed: {postURL} | {ex.Message}"); }
+
+            return false;
         }
     }
 }

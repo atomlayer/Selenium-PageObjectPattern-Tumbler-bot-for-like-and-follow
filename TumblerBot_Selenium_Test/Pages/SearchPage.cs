@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NLog;
 using OpenQA.Selenium;
 
 namespace TumblerBot_Selenium_Test.Pages
 {
     class SearchPage:PageBase
     {
-        public SearchPage(IWebDriver driver) : base(driver)
+        public SearchPage(IWebDriver driver, Logger logger) : base(driver, logger)
         {
         }
 

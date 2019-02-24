@@ -23,7 +23,7 @@ namespace TumblerBot_Selenium_Test
         private List<string> GetImagesLinks()
         {
             BotEnvironment.Driver.Navigate().GoToUrl(Url);
-            SearchPage searchPage=new SearchPage(BotEnvironment.Driver);
+            SearchPage searchPage=new SearchPage(BotEnvironment.Driver, BotEnvironment.Logger);
             List<string> links = new List<string>();
 
             for (int i = 0; i < _countLoop; i++)

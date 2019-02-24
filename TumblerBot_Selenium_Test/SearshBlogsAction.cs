@@ -36,13 +36,22 @@ namespace TumblerBot_Selenium_Test
             return links.Distinct().ToList();
         }
 
+        public string FindGroup(string str, string pattern)
+        {
+            Regex regex = new Regex(pattern);
+            return regex.Match(str).Groups[1].Value;
+        }
+
         private void GetBlogs(List<string> imageLinks)
         {
             int count = 0;
-            Regex regex = new Regex(@":\/\/([\w\d\-]+\.tumblr\.com)\/.?");
+            //Regex regex = new Regex(@":\/\/([\w\d\-]+\.tumblr\.com)\/.?");
             List<string> output = new List<string>();
 
-            while (imageLinks.Count > 0)
+            output=imageLinks.Select(n => FindGroup(n, @":\/\/([\w\d\-]+\.tumblr\.com)\/.?"))
+                .Distinct().ToList();
+
+            /*while (imageLinks.Count > 0)
             {
                 output.Add(imageLinks[0]);
                 string value = regex.Match(imageLinks[count]).Groups[1].Value;
@@ -54,7 +63,8 @@ namespace TumblerBot_Selenium_Test
                         newlinks.Add(link);
                 }
                 imageLinks = newlinks;
-            }
+            }*/
+
             BotEnvironment.DataBase.AddBlogs(output);
         }
 

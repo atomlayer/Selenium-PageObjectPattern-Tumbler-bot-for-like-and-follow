@@ -30,7 +30,7 @@
             </StackPanel>
             
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10" >
-                <Button Name="RunButton" Margin="0,0,30,0"  Width="146" Height="30" FontSize="18" FontWeight="Bold">Run</Button>
+                <Button Name="RunButton" Margin="0,0,30,0"  Width="146" Height="30" FontSize="18" FontWeight="Bold" Click="RunButton_Click">Run</Button>
                 <Button Name="StopButton" Margin="33,0,0,0" Width="140" Height="30" FontSize="18" FontWeight="Bold">Stop</Button>
             </StackPanel>
         </StackPanel>

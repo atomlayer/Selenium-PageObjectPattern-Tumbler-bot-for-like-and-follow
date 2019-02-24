@@ -8,8 +8,8 @@ namespace TumblerBot_Selenium_Test
 {
     public class DataBase
     {
-        private List<string> imageLinks;
-        public List<string> blogs;
+        private List<string> imageLinks=new List<string>();
+        public List<string> blogs=new List<string>();
         public int GetCountOfLike { get; set; }
         public int GetCountOfFollow { get; set; }
 
@@ -31,7 +31,7 @@ namespace TumblerBot_Selenium_Test
 
         public bool BlogsExists()
         {
-            throw new NotImplementedException();
+            return true;
         }
     }
 }

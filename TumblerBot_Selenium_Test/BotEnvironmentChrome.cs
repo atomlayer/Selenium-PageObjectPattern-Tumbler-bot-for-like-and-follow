@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using NLog;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 
@@ -7,12 +8,12 @@ namespace TumblerBot_Selenium_Test
 {
     public class BotEnvironmentChrome:BotEnvironmentBase
     {
-        public BotEnvironmentChrome()
+        public BotEnvironmentChrome(Logger logger):base (logger)
         {
-            Initialize();
+            
         }
 
-        public void Initialize()
+        public override void Initialize()
         {
             ChromeOptions options = new ChromeOptions();
 
@@ -32,9 +33,9 @@ namespace TumblerBot_Selenium_Test
             Driver = new OpenQA.Selenium.Chrome.ChromeDriver(options);
             Driver.Manage().Window.Maximize();
             Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
-            Jse = Driver as IJavaScriptExecutor;
-
- 
+            
+            base.Initialize();
+            
         }
 
         public async void RunAsync(ActionBase action)
@@ -46,12 +47,5 @@ namespace TumblerBot_Selenium_Test
             });
         }
 
-        public void Run(ActionBase action)
-        {
-            {
-                action.Initialize(this);
-                action.Action();
-            };
-        }
     }
 }

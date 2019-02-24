@@ -67,5 +67,10 @@ namespace TumblerBot_Selenium_Test
             Settings.GetDefaultSettings().SaveSettings();
             LoadSettings();
         }
+
+        private void RunButton_Click(object sender, RoutedEventArgs e)
+        {
+            new BotEnvironmentChrome(Logger).RunAsync(new LikeAndFollowAction());
+        }
     }
 }

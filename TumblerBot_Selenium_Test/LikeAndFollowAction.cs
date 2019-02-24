@@ -7,9 +7,14 @@ namespace TumblerBot_Selenium_Test
 {
     class LikeAndFollowAction:ActionBase
     {
+        public LikeAndFollowAction() : base()
+        {
+        }
+
         public LikeAndFollowAction(BotEnvironmentBase botEnvironment) : base(botEnvironment)
         {
         }
+
 
         public override void Action()
         {
@@ -22,7 +27,8 @@ namespace TumblerBot_Selenium_Test
             while (BotEnvironment.DataBase.BlogsExists())
             {
                 var blogUrl = BotEnvironment.DataBase.GetBlog();
-                GoToURL($"{blogUrl}archive/{DateTime.Now.Year}/{DateTime.Now.Month}");
+                var x = $"https://{blogUrl}/archive/{DateTime.Now.Year}/{DateTime.Now.Month}";
+                GoToURL($"https://{blogUrl}/archive/{DateTime.Now.Year}/{DateTime.Now.Month}");
 
                 var imgesLinks = archivePage.GetImageLinks(blogUrl).Take(BotEnvironment.Settings.MaxCountOfLikePerUser).ToList();
                 foreach (var imageLink in imgesLinks)

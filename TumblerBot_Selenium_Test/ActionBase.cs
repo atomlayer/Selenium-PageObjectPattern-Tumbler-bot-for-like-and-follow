@@ -9,7 +9,11 @@ namespace TumblerBot_Selenium_Test
     {
         public BotEnvironmentBase BotEnvironment;
 
-        public ActionBase(BotEnvironmentBase botEnvironment)
+        protected ActionBase()
+        {
+        }
+
+        protected ActionBase(BotEnvironmentBase botEnvironment)
         {
             BotEnvironment = botEnvironment;
         }

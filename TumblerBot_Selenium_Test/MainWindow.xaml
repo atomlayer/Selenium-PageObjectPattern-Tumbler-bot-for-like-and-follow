@@ -25,8 +25,8 @@
                 <TextBox Name="SearchWordsTextBox" Height="30"></TextBox>
             </StackPanel>
             <StackPanel Margin="10,10,10,15" Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Width="160" Name="SaveSettingsButton" Margin="0,0,14,0" >Save settings</Button>
-                <Button Width="160" Name="LoadDefaultSettingsButton" Margin="14,0,0,0">Load Default Settings</Button>
+                <Button Width="160" Name="SaveSettingsButton" Margin="0,0,14,0" Click="SaveSettingsButton_Click" >Save settings</Button>
+                <Button Width="160" Name="LoadDefaultSettingsButton" Margin="14,0,0,0" Click="LoadDefaultSettingsButton_Click">Load Default Settings</Button>
             </StackPanel>
             
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10" >

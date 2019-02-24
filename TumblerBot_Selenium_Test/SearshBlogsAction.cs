@@ -20,9 +20,9 @@ namespace TumblerBot_Selenium_Test
 
         int _countLoop = 150;
 
-        private List<string> GetImagesLinks()
+        private List<string> GetImagesLinks(string searchWord)
         {
-            BotEnvironment.Driver.Navigate().GoToUrl(Url);
+            GoToURL($"https://www.tumblr.com/search/{searchWord}/recent");
             SearchPage searchPage=new SearchPage(BotEnvironment.Driver, BotEnvironment.Logger);
             List<string> links = new List<string>();
 
@@ -60,7 +60,10 @@ namespace TumblerBot_Selenium_Test
 
         public override void Action()
         {
-            GetBlogs(GetImagesLinks());
+            foreach (var searchWord in BotEnvironment.Settings.SearchWords)
+            {
+                GetBlogs(GetImagesLinks(searchWord));
+            }
         }
     }
 }

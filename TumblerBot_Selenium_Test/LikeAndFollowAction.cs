@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Media;
+using System.Threading;
 using TumblerBot_Selenium_Test.Pages;
 
 namespace TumblerBot_Selenium_Test
@@ -24,23 +21,25 @@ namespace TumblerBot_Selenium_Test
 
             while (BotEnvironment.DataBase.BlogsExists())
             {
-                var blogURL = BotEnvironment.DataBase.GetBlog();
-                var imgesLinks = archivePage.GetImageLinks(blogURL).Take(BotEnvironment.Settings.MaxCountOfLikePerUser).ToList();
+                var blogUrl = BotEnvironment.DataBase.GetBlog();
+                GoToURL($"{blogUrl}archive/{DateTime.Now.Year}/{DateTime.Now.Month}");
+
+                var imgesLinks = archivePage.GetImageLinks(blogUrl).Take(BotEnvironment.Settings.MaxCountOfLikePerUser).ToList();
                 foreach (var imageLink in imgesLinks)
                 {
-                    BotEnvironment.Driver.Navigate().GoToUrl(imageLink);
+                    GoToURL(imageLink);
                     if(!postPage.PutLike(imageLink))
                     break;
+                    Thread.Sleep(BotEnvironment.Settings.Delay);
                 }
-                if (imgesLinks.Count > 0) postPage.ToFollow(blogURL);
+                if (imgesLinks.Count > 0) postPage.ToFollow(blogUrl);
 
                 int countOfLike = BotEnvironment.DataBase.GetCountOfLike,countOfFollow = BotEnvironment.DataBase.GetCountOfFollow;
                 BotEnvironment.Logger.Trace($"Count of like: {countOfLike}| Count Of follow {countOfFollow}");
                 if(countOfLike>=BotEnvironment.Settings.MaxCountOfLikePerDay | countOfFollow>=BotEnvironment.Settings.MaxCountOfFollowPerDay)
                     return;
             }
-            
-            
+
         }
     }
 }

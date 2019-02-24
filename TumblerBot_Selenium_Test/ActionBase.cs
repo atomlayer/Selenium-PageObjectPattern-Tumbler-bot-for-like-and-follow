@@ -22,6 +22,10 @@ namespace TumblerBot_Selenium_Test
 
         public abstract void Action();
 
+        public void GoToURL(string URL)
+        {
+            BotEnvironment.Driver.Navigate().GoToUrl(URL);
+        }
 
         public  void ScrollDown()
         {

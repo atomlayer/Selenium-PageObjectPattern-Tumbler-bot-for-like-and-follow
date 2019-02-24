@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using NLog;
+using OpenQA.Selenium;
 
 namespace TumblerBot_Selenium_Test
 {
@@ -6,6 +7,6 @@ namespace TumblerBot_Selenium_Test
     {
         public IWebDriver Browser;
         public IJavaScriptExecutor jse;
-
+        public Logger Logger;
     }
 }

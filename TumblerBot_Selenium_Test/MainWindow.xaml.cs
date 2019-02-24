@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using NLog;
 
 namespace TumblerBot_Selenium_Test
 {
@@ -20,9 +21,12 @@ namespace TumblerBot_Selenium_Test
     /// </summary>
     public partial class MainWindow : Window
     {
+        private Logger Logger;
+
         public MainWindow()
         {
             InitializeComponent();
+            Logger = LogManager.GetLogger("log");
         }
 
     }

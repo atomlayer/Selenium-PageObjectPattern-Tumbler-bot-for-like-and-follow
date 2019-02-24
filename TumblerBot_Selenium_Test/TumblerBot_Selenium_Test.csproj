@@ -72,6 +72,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DataBase.cs" />
+    <Compile Include="Pages\SearchPage.cs" />
     <Compile Include="Settings.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -81,7 +83,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="BotBase.cs" />
+    <Compile Include="ActionBase.cs" />
     <Compile Include="BotEnvironmentBase.cs" />
     <Compile Include="BotEnvironmentChrome.cs" />
     <Compile Include="MainWindow.xaml.cs">
@@ -90,7 +92,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PageBase.cs" />
+    <Compile Include="Pages\PageBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

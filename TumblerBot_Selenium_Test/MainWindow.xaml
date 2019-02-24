@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TumblerBot_Selenium_Test"
         mc:Ignorable="d"
-        Title="Tumbler Bot [Selenium Test]" Height="350" Width="405" MinWidth="405" MinHeight="350" MaxWidth="405" MaxHeight="350">
+        Title="Tumbler action [Selenium Test]" Height="350" Width="405" MinWidth="405" MinHeight="350" MaxWidth="405" MaxHeight="350">
     <Grid>
         <StackPanel Margin="10" >
             <StackPanel Margin="10" Orientation="Horizontal">

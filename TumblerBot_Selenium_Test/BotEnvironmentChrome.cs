@@ -28,29 +28,29 @@ namespace TumblerBot_Selenium_Test
             options.AddArgument("--disable-dev-shm-usage"); // overcome limited resource problems
             options.AddArgument("--no-sandbox"); // Bypass OS security model
 
-            //Browser = new RemoteWebDriver();
-            Browser = new OpenQA.Selenium.Chrome.ChromeDriver(options);
-            Browser.Manage().Window.Maximize();
-            Browser.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
-            jse = Browser as IJavaScriptExecutor;
+            //Driver = new RemoteWebDriver();
+            Driver = new OpenQA.Selenium.Chrome.ChromeDriver(options);
+            Driver.Manage().Window.Maximize();
+            Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+            Jse = Driver as IJavaScriptExecutor;
 
  
         }
 
-        public async void RunAsync(BotBase Bot)
+        public async void RunAsync(ActionBase action)
         {
             await Task.Run(() =>
             {
-                Bot.Initialize(this);
-                Bot.Action();
+                action.Initialize(this);
+                action.Action();
             });
         }
 
-        public void Run(BotBase Bot)
+        public void Run(ActionBase action)
         {
             {
-                Bot.Initialize(this);
-                Bot.Action();
+                action.Initialize(this);
+                action.Action();
             };
         }
     }

@@ -70,7 +70,9 @@ namespace TumblerBot_Selenium_Test
 
         private void RunButton_Click(object sender, RoutedEventArgs e)
         {
-            new BotEnvironmentChrome(Logger).RunAsync(new LikeAndFollowAction());
+            new BotEnvironmentChrome(Logger, GetSettings()).RunAsync(new LikeAndFollowAction());
         }
+
+
     }
 }

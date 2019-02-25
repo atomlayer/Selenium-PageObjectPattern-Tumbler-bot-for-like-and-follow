@@ -11,16 +11,16 @@ namespace TumblerBot_Selenium_Test
         public Settings Settings;
         public DataBase DataBase;
 
-        public BotEnvironmentBase(Logger logger)
+        protected BotEnvironmentBase(Logger logger, Settings settings)
         {
             Logger = logger;
+            Settings = settings;
             Initialize();
         }
 
         public virtual void Initialize()
         {
             Jse = Driver as IJavaScriptExecutor;
-            Settings = Settings.LoadSettings();
             DataBase =new DataBase();
         }
     }

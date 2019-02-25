@@ -83,7 +83,7 @@ namespace TumblerBot_Selenium_Test
                 try { MaxCountOfLikePerDay = Convert.ToInt32(value); }
                 catch { throw new Exception("Invalid data format for  MaxCountOfLikePerDay"); }
                 if(MaxCountOfLikePerDay<=0)
-                    throw new Exception("Invalid data format for  MaxCountOfLikePerDay");
+                    throw new Exception("Invalid data format for MaxCountOfLikePerDay");
             }
             get { return MaxCountOfLikePerDay.ToString(); }
         }
@@ -113,7 +113,7 @@ namespace TumblerBot_Selenium_Test
                 MaxCountOfLikePerDay = 1000,
                 MaxCountOfLikePerUser = 3,
                 MaxCountOfFollowPerDay = 200,
-                SearchWords = new List<string> {"test1", "test2"}
+                SearchWords = new List<string> { "fractals", "nature" }
             };
             return settings;
         }

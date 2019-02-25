@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TumblerBot_Selenium_Test"
         mc:Ignorable="d"
-        Title="Tumbler action [Selenium Test]" Height="350" Width="405" MinWidth="405" MinHeight="350" MaxWidth="405" MaxHeight="350">
+        Title="Tumbler bot for like and follow [Selenium Test]" Height="350" Width="405" MinWidth="405" MinHeight="350" MaxWidth="405" MaxHeight="350" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid>
         <StackPanel Margin="10" >
             <StackPanel Margin="10" Orientation="Horizontal">
@@ -30,8 +30,7 @@
             </StackPanel>
             
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10" >
-                <Button Name="RunButton" Margin="0,0,30,0"  Width="146" Height="30" FontSize="18" FontWeight="Bold" Click="RunButton_Click">Run</Button>
-                <Button Name="StopButton" Margin="33,0,0,0" Width="140" Height="30" FontSize="18" FontWeight="Bold">Stop</Button>
+                <Button Name="RunButton" Margin="0,0,0,0"  Width="300" Height="30" FontSize="18" FontWeight="Bold" Click="RunButton_Click">Run</Button>
             </StackPanel>
         </StackPanel>
     </Grid>

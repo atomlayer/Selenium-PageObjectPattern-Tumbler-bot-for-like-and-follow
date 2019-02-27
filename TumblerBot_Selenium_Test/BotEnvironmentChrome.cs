@@ -14,7 +14,7 @@ namespace TumblerBot_Selenium_Test
         {
             ChromeOptions options = new ChromeOptions();
 
-            options.AddArgument($"user-data-dir={Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + $"/Local/Google/Chrome/User Data/Profile 1/"}");
+            options.AddArgument($"user-data-dir={Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + $"/Local/Google/Chrome/User DataManager/Profile 1/"}");
             options.AddArgument("--start-maximized");
             options.AddArgument("disable-infobars"); // disabling infobars
             options.AddArgument("--disable-extensions"); // disabling extensions

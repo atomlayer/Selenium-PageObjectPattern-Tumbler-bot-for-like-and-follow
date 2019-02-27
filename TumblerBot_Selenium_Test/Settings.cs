@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Text;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
 
 namespace TumblerBot_Selenium_Test
@@ -24,7 +22,7 @@ namespace TumblerBot_Selenium_Test
         [JsonProperty]
         public List<string> SearchWords;
 
-        public int Delay;
+        public int Delay=0;
 
         private static string _settingsFile=@"settings.json";
 

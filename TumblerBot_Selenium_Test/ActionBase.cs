@@ -28,20 +28,14 @@ namespace TumblerBot_Selenium_Test
 
         public void GoToURL(string URL)
         {
-            BotEnvironment.Driver.Navigate().GoToUrl(URL);
+            try{ BotEnvironment.Driver.Navigate().GoToUrl(URL); }
+            catch (Exception e) { BotEnvironment.Logger.Debug(e.Message);}
         }
 
         public  void ScrollDown()
         {
-            try
-            {
-                BotEnvironment.Jse.ExecuteScript("window.scrollBy(0,1000)");
-            }
-            catch (Exception e)
-            {
-                BotEnvironment.Logger.Error(e);
-            }
-
+            try { BotEnvironment.Jse.ExecuteScript("window.scrollBy(0,1000)");}
+            catch (Exception e) { BotEnvironment.Logger.Error(e);}
         }
     }
 }

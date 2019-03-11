@@ -8,8 +8,11 @@ namespace TumblerBot_Selenium_Test
 {
     class SearshBlogsAction:ActionBase
     {
-        public SearshBlogsAction(BotEnvironmentBase botEnvironment) : base(botEnvironment)
+        private DataManager _DM;
+
+        public SearshBlogsAction(DataManager dm, BotEnvironmentBase botEnvironment) : base(botEnvironment)
         {
+            _DM = dm;
         }
 
         int _countLoop = 150;
@@ -24,7 +27,7 @@ namespace TumblerBot_Selenium_Test
             {
                 ScrollDown();
                 try{ links.AddRange(searchPage.GetImageLinks());}
-                catch (Exception e) { BotEnvironment.Logger.Error(e.Message); }
+                catch (Exception e) { /*BotEnvironment.Logger.Debug(e.Message);*/ }
                 Thread.Sleep(BotEnvironment.Settings.Delay);
             }
             return links.Distinct().ToList();
@@ -32,8 +35,8 @@ namespace TumblerBot_Selenium_Test
 
         private void GetBlogs(List<string> postLinks)
         {
-            var output=postLinks.Select(Helper.GetBlogURL).Distinct().ToList();
-            BotEnvironment.DB.AddBlogs(output);
+            var output=postLinks.Select(Helper.GetBlogURL).Distinct().Select(n=>new Blog(){URL=n}).ToList();
+            _DM.AddBlogs(output);
         }
 
         public override void Action()

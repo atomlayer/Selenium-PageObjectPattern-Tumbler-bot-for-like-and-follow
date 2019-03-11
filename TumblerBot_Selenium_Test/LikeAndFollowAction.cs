@@ -2,72 +2,88 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using System.Windows.Documents;
 using TumblerBot_Selenium_Test.Pages;
 
 namespace TumblerBot_Selenium_Test
 {
     class LikeAndFollowAction:ActionBase
     {
-        public LikeAndFollowAction()
+
+        private ArchivePage _archivePage;
+        private PostPage _postPage;
+        private  DataManager _DM;
+
+
+        public LikeAndFollowAction(){}
+        
+        public LikeAndFollowAction(BotEnvironmentBase botEnvironment) : base(botEnvironment) {}
+
+        public void Initialize()
         {
+            _archivePage = new ArchivePage(BotEnvironment.Driver, BotEnvironment.Logger);
+            _postPage = new PostPage(BotEnvironment.Driver, BotEnvironment.Logger);
+            _DM = new DataManager();
         }
 
-        public LikeAndFollowAction(BotEnvironmentBase botEnvironment) : base(botEnvironment)
+        private bool likePosts(Blog blog)
         {
-        }
+            if (blog.Posts.Count() == 0) return false;
 
-        private void likePosts(List<string> imgesLinks, PostPage postPage)
-        {
-            foreach (var postUrl in imgesLinks)
+            foreach (var post in blog.Posts)
             {
-                GoToURL(postUrl);
-                if (postPage.PutLike(postUrl))
+                GoToURL(post.URL);
+                if (_postPage.PutLike(post.URL) )
                 {
-                    BotEnvironment.DB.SetPostURLIsLiked(postUrl);
+                    post.IsLiked = true;
+                    BotEnvironment.Logger.Info($"Liked: {post.URL}");
                     Thread.Sleep(BotEnvironment.Settings.Delay);
                 }
                 else
                 {
-                    BotEnvironment.DB.SetPostURLErrorState(postUrl);
-                    break;
+                    post.IsErrorState = true;
+                    BotEnvironment.Logger.Info($"Error! Not liked: {post.URL}");
+                    return false;
                 }
             }
+            return true;
         }
 
-        private void ToFollow(List<string> imgesLinks, PostPage postPage, string blogUrl)
+        private void ToFollow(Blog blog)
         {
-            if (imgesLinks.Count > 0)
+            if (_postPage.ToFollow(blog.URL))
             {
-                if(postPage.ToFollow(blogUrl))
-                    BotEnvironment.DB.SetBlogURLIsFollowed(blogUrl);
-                else BotEnvironment.DB.SetBlogURLErrorState(blogUrl);
+                blog.Isfollowed = true;
+                BotEnvironment.Logger.Info($"Followed: {blog.URL}");
+            }
+            else
+            {
+                blog.IsErrorState = true;
+                BotEnvironment.Logger.Info($"Error! Not followed: {blog.URL}");
             }
         }
 
         public override void Action()
         {
-            BotEnvironment.DB.ConnectionOpen();
-            new SearshBlogsAction(BotEnvironment).Action();
+            Initialize();
+            new SearshBlogsAction(_DM, BotEnvironment).Action();
 
-            ArchivePage archivePage =new ArchivePage(BotEnvironment.Driver, BotEnvironment.Logger);
-            PostPage postPage =new PostPage(BotEnvironment.Driver, BotEnvironment.Logger);
-
-            while (BotEnvironment.DB.BlogsExists())
+            while (_DM.BlogsExists())
             {
-                var blogUrl = BotEnvironment.DB.GetBlog();
-                GoToURL($"https://{blogUrl}/archive/{DateTime.Now.Year}/{DateTime.Now.Month}");
-                var imgesLinks = archivePage.GetImageLinks(blogUrl).Take(BotEnvironment.Settings.MaxCountOfLikePerUser).ToList();
-                BotEnvironment.DB.AddPosts(imgesLinks, blogUrl);
+                var blog = _DM.GetBlog();
 
-                likePosts(imgesLinks, postPage);
-                ToFollow(imgesLinks, postPage, blogUrl);
+                GoToURL($"https://{blog.URL}/archive/{DateTime.Now.Year}/{DateTime.Now.Month}");
+                blog.AddPosts(_archivePage.GetImageLinks(blog.URL).Take(BotEnvironment.Settings.MaxCountOfLikePerUser).ToList());
 
-                int countOfLike = BotEnvironment.DB.GetCountOfLikePerDay(),countOfFollow = BotEnvironment.DB.GetCountOfFollowPerDay();
-                BotEnvironment.Logger.Trace($"Count of like: {countOfLike}| Count Of follow {countOfFollow}");
-                if(countOfLike>=BotEnvironment.Settings.MaxCountOfLikePerDay | countOfFollow>=BotEnvironment.Settings.MaxCountOfFollowPerDay)
+                if(likePosts(blog))
+                    ToFollow(blog);
+
+                BotEnvironment.Logger.Trace($"Count of like: {_DM.CountOfLike()}| Count Of follow {_DM.CountOfFollow()}");
+                if(_DM.CountOfLike() >= BotEnvironment.Settings.MaxCountOfLikePerDay | 
+                   _DM.CountOfFollow() >= BotEnvironment.Settings.MaxCountOfFollowPerDay)
                     return;
             }
-            BotEnvironment.DB.ConnectionClose();
+
         }
 
     }

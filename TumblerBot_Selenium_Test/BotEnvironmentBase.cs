@@ -9,7 +9,6 @@ namespace TumblerBot_Selenium_Test
         public IJavaScriptExecutor Jse;
         public Logger Logger;
         public Settings Settings;
-        public DataManager DB;
 
         protected BotEnvironmentBase(Logger logger, Settings settings)
         {
@@ -21,7 +20,6 @@ namespace TumblerBot_Selenium_Test
         public virtual void Initialize()
         {
             Jse = Driver as IJavaScriptExecutor;
-            DB =new DataManager();
         }
     }
 }
